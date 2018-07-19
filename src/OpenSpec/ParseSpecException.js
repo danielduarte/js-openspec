@@ -1,42 +1,48 @@
 class ParseSpecException extends Error
 {
-    constructor (message, code) {
+    constructor (message, code, errors = null) {
         super(message);
-        this.code = code;
-    }
-/*
-    protected $_errors;
 
-    public function __construct($message, $code, array $errors = null, Throwable $previous = null)
-    {
-        if ($code === self::CODE_MULTIPLE_PARSER_ERROR) {
-            $messages = array_column($errors, 1);
-            $message = $message . PHP_EOL . '- ' . implode(PHP_EOL . '- ', $messages);
+        this.code    = code;
 
-            $this->_errors = $errors;
+        if (code === ParseSpecException.CODE_MULTIPLE_PARSER_ERROR) {
+            let messages = errors.map((error) => { return error[1]; });
+
+            message = message + "\n- " + messages.join("\n- ");
+
+            this._errors = errors;
         } else {
-            $this->_errors = [[$code, $message]];
+            this._errors = [[code, message]];
         }
-
-        parent::__construct($message, $code, $previous);
     }
 
-    public function getErrors(): array
+    getErrors()
     {
-        return $this->_errors;
+        return this._errors;
     }
 
-    public function containsError($code): bool
-    {
-        $errorCodes = array_column($this->_errors, 0);
-
-        return in_array($code, $errorCodes, true);
-    }*/
+    // containsError(code)
+    // {
+    //     let errorCodes = this._errors.map((error) => {
+    //         return error[0];
+    //     });
+    //
+    //     return errorCodes.indexOf(code) >= 0;
+    // }
 }
 
 // @todo review these answer and the following line
 // https://stackoverflow.com/questions/1382107/whats-a-good-way-to-extend-error-in-javascript#answer-43595019
 ParseSpecException.prototype = Error.prototype;
+
+ParseSpecException.prototype.containsError = function (code)
+{
+    let errorCodes = this._errors.map((error) => {
+        return error[0];
+    });
+
+    return errorCodes.indexOf(code) >= 0;
+}
 
 ParseSpecException.CODE_GENERAL_PARSER_ERROR   =  1;
 ParseSpecException.CODE_MULTIPLE_PARSER_ERROR  =  2;

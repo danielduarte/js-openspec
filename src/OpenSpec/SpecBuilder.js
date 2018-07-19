@@ -1,17 +1,14 @@
-/* @todo complete this part of the conversion to JS
-namespace OpenSpec;
+//import ParseSpecException from './ OpenSpec\Spec\Type\TypeSpec;
 
-use OpenSpec\Spec\Type\TypeSpec;
-use OpenSpec\Spec\Type\NullSpec;
-use OpenSpec\Spec\Type\BooleanSpec;
-use OpenSpec\Spec\Type\StringSpec;
-use OpenSpec\Spec\Type\IntegerSpec;
-use OpenSpec\Spec\Type\FloatSpec;
-use OpenSpec\Spec\Type\ObjectSpec;
-use OpenSpec\Spec\Type\ArraySpec;
-use OpenSpec\Spec\Type\MixedSpec;
-use OpenSpec\Spec\Type\RefSpec;
-*/
+import NullSpec           from './Spec/Type/NullSpec';
+import BooleanSpec        from './Spec/Type/BooleanSpec';
+import StringSpec         from './Spec/Type/StringSpec';
+import IntegerSpec        from './Spec/Type/IntegerSpec';
+import FloatSpec          from './Spec/Type/FloatSpec';
+import ObjectSpec         from './Spec/Type/ObjectSpec';
+import ArraySpec          from './Spec/Type/ArraySpec';
+import MixedSpec          from './Spec/Type/MixedSpec';
+import RefSpec            from './Spec/Type/RefSpec';
 import ParseSpecException from './ParseSpecException';
 
 
@@ -51,15 +48,15 @@ class SpecBuilder
         }
 
         let classMap = {
-            'null'    : 'NullSpec',
-            'boolean' : 'BooleanSpec',
-            'string'  : 'StringSpec',
-            'integer' : 'IntegerSpec',
-            'float'   : 'FloatSpec',
-            'object'  : 'ObjectSpec',
-            'array'   : 'ArraySpec',
-            'mixed'   : 'MixedSpec',
-            'ref'     : 'RefSpec',
+            'null'    : NullSpec,
+            'boolean' : BooleanSpec,
+            'string'  : StringSpec,
+            'integer' : IntegerSpec,
+            'float'   : FloatSpec,
+            'object'  : ObjectSpec,
+            'array'   : ArraySpec,
+            'mixed'   : MixedSpec,
+            'ref'     : RefSpec,
         };
 
         if (!classMap.hasOwnProperty(type)) {

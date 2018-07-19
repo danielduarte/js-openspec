@@ -1,15 +1,18 @@
 //import Spec from 'OpenSpec\Spec\Spec';
 // @todo finish this conversion to JS
+import SpecLibraryException from './SpecLibraryException';
+import SpecBuilder          from './SpecBuilder';
+
 
 class SpecLibrary
 {
-    /*constructor () {
+    constructor() {
         this._specs = [];
     }
     
     hasSpec(name)
     {
-        return array_key_exists(name, this._specs);
+        return this._specs.hasOwnProperty(name);
     }
 
     registerSpec(name, spec)
@@ -25,7 +28,7 @@ class SpecLibrary
 
     registerSpecFromData(name, specData)
     {
-        spec = SpecBuilder.getInstance().build(specData, this);
+        let spec = SpecBuilder.getInstance().build(specData, this);
 
         return this.registerSpec(name, spec);
     }
@@ -36,8 +39,8 @@ class SpecLibrary
             throw new SpecLibraryException();
         }
 
-        spec = this._specs[name];
-        unset(this._specs[name]);
+        let spec = this._specs[name];
+        delete this._specs[name];
 
         return spec;
     }
@@ -45,14 +48,14 @@ class SpecLibrary
     // @todo check if this method is useful
     getSpecsCount()
     {
-        return count(this._specs);
+        return Object.keys(this._specs).length
     }
 
     unregisterAll()
     {
         this._specs = [];
     }
-
+/*
     getSpec(name)
     {
         if (!this.hasSpec(name)) {

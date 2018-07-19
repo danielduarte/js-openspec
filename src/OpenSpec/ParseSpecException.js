@@ -1,9 +1,3 @@
-/*namespace OpenSpec;
-
-use RuntimeException;
-use Throwable;
-*/
-
 class ParseSpecException extends Error
 {
     constructor (message, code) {

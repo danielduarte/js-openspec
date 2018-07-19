@@ -1,4 +1,5 @@
 import assert from 'assert';
+
 import SpecBuilder        from '../../../src/OpenSpec/SpecBuilder'
 import ParseSpecException from '../../../src/OpenSpec/ParseSpecException';
 import SpecLibrary        from '../../../src/OpenSpec/SpecLibrary';

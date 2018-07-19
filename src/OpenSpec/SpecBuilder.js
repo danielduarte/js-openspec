@@ -17,11 +17,20 @@ import ParseSpecException from './ParseSpecException';
 
 class SpecBuilder
 {
+    constructor() {
+        if (!SpecBuilder.canCreateInstance) {
+            throw new Error('Cannot instantiate SpecBuilder with new. Please use getInstance() instead.');
+        }
+    }
+
     static getInstance()
     {
-       if (typeof SpecBuilder._instance === 'undefined') {
+        if (typeof SpecBuilder._instance === 'undefined') {
+            // @todo improve this solution for singleton to make sure it is thread-safe and also make sure more instances cannot be created.
+            SpecBuilder.canCreateInstance = true;
             SpecBuilder._instance = new SpecBuilder();
-       }
+            SpecBuilder.canCreateInstance = false;
+        }
 
         return SpecBuilder._instance;
     }

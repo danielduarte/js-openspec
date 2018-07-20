@@ -1,8 +1,8 @@
 import TypeSpec           from "./TypeSpec";
-// import ParseSpecException from "../../ParseSpecException";
+import ParseSpecException from "../../ParseSpecException";
 
 
-class FloatSpec //extends TypeSpec
+class FloatSpec extends TypeSpec
 {
     _initValues() {
     }

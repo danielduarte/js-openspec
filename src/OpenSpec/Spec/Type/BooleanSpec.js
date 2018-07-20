@@ -1,23 +1,27 @@
-//use OpenSpec\ParseSpecException;
+import TypeSpec           from "./TypeSpec";
+import ParseSpecException from "../../ParseSpecException";
 
 
-class BooleanSpec //extends TypeSpec
+class BooleanSpec extends TypeSpec
 {
-   /* public function getTypeName(): string
+    _initValues() {
+    }
+
+    getTypeName()
     {
         return 'boolean';
     }
 
-    public function getRequiredFields(): array
+    getRequiredFields()
     {
         return ['type'];
     }
 
-    public function getOptionalFields(): array
+    getOptionalFields()
     {
         return [];
     }
-*/
+
     parse(value)
     {
         let errors = [];

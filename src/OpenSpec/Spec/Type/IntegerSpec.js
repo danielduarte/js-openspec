@@ -1,23 +1,28 @@
-//use OpenSpec\ParseSpecException;
+import TypeSpec           from "./TypeSpec";
+import ParseSpecException from "../../ParseSpecException";
 
 
-class IntegerSpec //extends TypeSpec
-{/*
-    public function getTypeName(): string
+class IntegerSpec extends TypeSpec
+{
+    // @todo implement this default empty method in parent
+    _initValues() {
+    }
+
+    getTypeName()
     {
         return 'integer';
     }
 
-    public function getRequiredFields(): array
+    getRequiredFields()
     {
         return ['type'];
     }
 
-    public function getOptionalFields(): array
+    getOptionalFields()
     {
         return [];
     }
-*/
+
     parse(value)
     {
         let errors = [];

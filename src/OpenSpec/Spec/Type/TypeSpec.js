@@ -2,6 +2,7 @@
 use OpenSpec\Spec\Spec;*/
 import SpecBuilder from "../../SpecBuilder";
 import SpecLibrary from "../../SpecLibrary";
+import ParseSpecException from "../../ParseSpecException";
 // import ObjectSpec  from "./ObjectSpec";
 
 
@@ -27,6 +28,7 @@ class TypeSpec //extends Spec
             throw new ParseSpecException('Invalid spec data.', ParseSpecException.CODE_MULTIPLE_PARSER_ERROR, errors);
         }
     }
+
 /*
     public abstract function getTypeName(): string;
 

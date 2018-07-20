@@ -42,7 +42,7 @@ ParseSpecException.prototype.containsError = function (code)
     });
 
     return errorCodes.indexOf(code) >= 0;
-}
+};
 
 ParseSpecException.CODE_GENERAL_PARSER_ERROR   =  1;
 ParseSpecException.CODE_MULTIPLE_PARSER_ERROR  =  2;

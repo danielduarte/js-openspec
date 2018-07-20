@@ -1,23 +1,28 @@
-//use OpenSpec\ParseSpecException;
+import TypeSpec           from "./TypeSpec";
+import ParseSpecException from "../../ParseSpecException";
 
 
-class NullSpec //extends TypeSpec
-{/*
-    public function getTypeName(): string
+class NullSpec extends TypeSpec
+{
+    // @todo implement this default empty method in parent
+    _initValues() {
+    }
+
+    getTypeName()
     {
         return 'null';
     }
 
-    public function getRequiredFields(): array
+    getRequiredFields()
     {
         return ['type'];
     }
 
-    public function getOptionalFields(): array
+    getOptionalFields()
     {
         return [];
     }
-*/
+
     parse(value)
     {
         errors = [];

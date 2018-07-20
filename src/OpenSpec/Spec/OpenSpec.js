@@ -1,15 +1,15 @@
-/*use OpenSpec\SpecBuilder;
-use OpenSpec\ParseSpecException;
-*/
 import SpecBuilder from "../SpecBuilder";
 import SpecLibrary from '../SpecLibrary';
 import ParseSpecException from "../ParseSpecException";
+import Spec from "./Spec";
 
 
-class OpenSpec// extends Spec
+class OpenSpec extends Spec
 {
     constructor (specData)
     {
+        super();
+
         this._library = new SpecLibrary();
 
         let errors = this._validateSpecData(specData);
@@ -66,12 +66,12 @@ class OpenSpec// extends Spec
             $this->_library->registerSpecFromData($defName, $defSpec);
         }
     }
-
-    public function parse($userSpecData)
+*/
+    parse(userSpecData)
     {
-        return $this->_spec->parse($userSpecData);
+        return this._spec.parse(userSpecData);
     }
-
+/*
     public function getOpenspecVersion()
     {
         return $this->_openspecVersion;

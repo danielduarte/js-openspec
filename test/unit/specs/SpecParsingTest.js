@@ -48,8 +48,7 @@ describe('SpecParsingTest', function() {
             }
             exception = err;
         }
-        //console.log('esta es la excepcion', exception);
-        console.log(exception._errors);
+
         assert(exception !== null && exception.containsError(ParseSpecException.CODE_MISSING_REQUIRED_FIELD), "Expected 'missing required field' error trying to parse invalid spec, but no error occurred.");
     });
 

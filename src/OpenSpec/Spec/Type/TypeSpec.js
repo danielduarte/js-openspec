@@ -1,8 +1,8 @@
 /*use OpenSpec\ParseSpecException;
-use OpenSpec\Spec\Spec;
-use OpenSpec\SpecBuilder;
-use OpenSpec\SpecLibrary;*/
-import ObjectSpec from "./ObjectSpec";
+use OpenSpec\Spec\Spec;*/
+import SpecBuilder from "../../SpecBuilder";
+import SpecLibrary from "../../SpecLibrary";
+// import ObjectSpec  from "./ObjectSpec";
 
 
 // @todo move this util function to a more apropriate place
@@ -14,7 +14,6 @@ const array_diff = function (array1, array2) {
 
 class TypeSpec //extends Spec
 {
-
     constructor(specData, library)
     {
         this._initValues();
@@ -32,29 +31,29 @@ class TypeSpec //extends Spec
     public abstract function getTypeName(): string;
 
     public abstract function getRequiredFields(): array;
-
-    protected function _getAnySpec()
+*/
+    _getAnySpec()
     {
-        if ($this->_anySpec === null) {
-            $anySpecData = [
-                'type' => 'mixed',
-                'options' => [
-                    ['type' => 'null'],
-                    ['type' => 'boolean'],
-                    ['type' => 'string'],
-                    ['type' => 'integer'],
-                    ['type' => 'float'],
-                    ['type' => 'array'], // Array option must be before object, to avoid generating objects when they're "normal" arrays.
-                    ['type' => 'object', 'extensible' => true],
+        if (this._anySpec === null) {
+            let anySpecData = {
+                type: 'mixed',
+                options: [
+                    { type: 'null' },
+                    { type: 'boolean' },
+                    { type: 'string' },
+                    { type: 'integer' },
+                    { type: 'float' },
+                    { type: 'array' }, // Array option must be before object, to avoid generating objects when they're "normal" arrays.
+                    { type: 'object', extensible: true },
                 ],
-            ];
+            };
 
-            $this->_anySpec = SpecBuilder::getInstance()->build($anySpecData, $this->_library);
+            this._anySpec = SpecBuilder.getInstance().build(anySpecData, this._library);
         }
 
-        return $this->_anySpec;
+        return this._anySpec;
     }
-*/
+
     getAllFields()
     {
         let reqFields = this.getRequiredFields();

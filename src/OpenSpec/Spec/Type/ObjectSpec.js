@@ -1,4 +1,4 @@
-//import Entity             from "../../Entity";
+import Entity             from "../../Entity";
 import SpecBuilder        from "../../SpecBuilder";
 import TypeSpec           from "./TypeSpec";
 import ParseSpecException from "../../ParseSpecException";
@@ -35,13 +35,13 @@ class ObjectSpec extends TypeSpec
     {
         return ['fields', 'extensible', 'extensionFields', 'requiredFields'];
     }
-/*
-    public function isValidFieldName(string $fieldName): bool
+
+    isValidFieldName(fieldName)
     {
         // @todo should the string $fieldName be checked to make sure it is a valid identifier?
-        return $this->_extensible || array_key_exists($fieldName, $this->_fieldSpecs);
+        return this._extensible || this._fieldSpecs.hasOwnProperty(fieldName);
     }
-*/
+
     _validateFieldSpecData_fields(fieldValue)
     {
         let errors = [];
@@ -160,27 +160,30 @@ class ObjectSpec extends TypeSpec
             errors.push([ParseSpecException.CODE_MISSING_REQUIRED_FIELD, `Missing required field(s) ${missingRequiredMetakeysStr} in object spec.`]);
             throw new ParseSpecException('Could not parse the value', ParseSpecException.CODE_MULTIPLE_PARSER_ERROR, errors);
         }
-/*
+
         // Check that values follow the field specs
-        foreach ($value as $fieldKey => $fieldValue) {
-            $fieldHasSpec = in_array($fieldKey, $specFieldKeys, true);
+        for (let fieldKey in value) if (value.hasOwnProperty(fieldKey)) {
+            let fieldValue = value[fieldKey];
 
-            if (!$fieldHasSpec && !$this->_extensible) {
-                $errors[] = [ParseSpecException::CODE_UNEXPECTED_FIELDS, "Unexpected field '$fieldKey' in value for object spec."];
-                throw new ParseSpecException('Could not parse the value', ParseSpecException::CODE_MULTIPLE_PARSER_ERROR, $errors);
+            let fieldHasSpec = specFieldKeys.indexOf(fieldKey) >= 0;
+
+            if (!fieldHasSpec && !this._extensible) {
+                errors.push([ParseSpecException.CODE_UNEXPECTED_FIELDS, "Unexpected field '$fieldKey' in value for object spec."]);
+                throw new ParseSpecException('Could not parse the value', ParseSpecException.CODE_MULTIPLE_PARSER_ERROR, errors);
             }
-            if ($fieldHasSpec) {
-                $fieldSpec = $this->_fieldSpecs[$fieldKey];
-            } elseif ($this->_extensionFieldsSpec !== null) {
-                $fieldSpec = $this->_extensionFieldsSpec;
+            let fieldSpec;
+            if (fieldHasSpec) {
+                fieldSpec = this._fieldSpecs[fieldKey];
+            } else if (this._extensionFieldsSpec !== null) {
+                fieldSpec = this._extensionFieldsSpec;
             } else {
-                $fieldSpec = $this->_getAnySpec();
+                fieldSpec = this._getAnySpec();
             }
 
-                $parsedValue[$fieldKey] = $fieldSpec->parse($fieldValue);
+            parsedValue[fieldKey] = fieldSpec.parse(fieldValue);
         }
 
-        return new Entity($this, $parsedValue);*/
+        return new Entity(this, parsedValue);
     }
 }
 

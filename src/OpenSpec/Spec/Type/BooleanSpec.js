@@ -20,14 +20,14 @@ class BooleanSpec //extends TypeSpec
 */
     parse(value)
     {
-        /*$errors = [];
+        let errors = [];
 
-        if (!is_bool($value)) {
-            $errors[] = [ParseSpecException::CODE_BOOLEAN_EXPECTED, "Expected boolean value for 'boolean' type spec, but " . gettype($value) . " given."];
-            throw new ParseSpecException('Could not parse the value', ParseSpecException::CODE_MULTIPLE_PARSER_ERROR, $errors);
+        if (typeof value !== 'boolean') {
+            errors.push([ParseSpecException.CODE_BOOLEAN_EXPECTED, "Expected boolean value for 'boolean' type spec, but " + (typeof value) + " given."]);
+            throw new ParseSpecException('Could not parse the value', ParseSpecException.CODE_MULTIPLE_PARSER_ERROR, errors);
         }
 
-        return $value;*/
+        return value;
     }
 }
 

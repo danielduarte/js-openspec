@@ -1,69 +1,84 @@
-//use OpenSpec\ParseSpecException;
-//use OpenSpec\SpecBuilder;
+import SpecBuilder from "../../SpecBuilder";
+import TypeSpec           from "./TypeSpec";
+import ParseSpecException from "../../ParseSpecException";
 
 
-class MixedSpec //extends TypeSpec
-{/*
-    protected $_optionsSpec = [];
+class MixedSpec extends TypeSpec
+{
+    _initValues() {
+        this._optionsSpec = [];
+    }
 
-    public function getTypeName(): string
+    getTypeName()
     {
         return 'mixed';
     }
 
-    public function getRequiredFields(): array
+    getRequiredFields()
     {
         return ['type', 'options'];
     }
 
-    public function getOptionalFields(): array
+    getOptionalFields()
     {
         return [];
     }
 
-    protected function _validateFieldSpecData_options($fieldValue): array
+    _validateFieldSpecData_options(fieldValue)
     {
-        $errors = [];
+        let errors = [];
 
-        if (!is_array($fieldValue)) {
-            $errors[] = [ParseSpecException::CODE_ARRAY_EXPECTED, "Array expected as value of 'options' field, but " . gettype($fieldValue) . " given."];
-            return $errors;
+        if (!Array.isArray(fieldValue)) {
+            errors.push([ParseSpecException.CODE_ARRAY_EXPECTED, "Array expected as value of 'options' field, but " + (typeof fieldValue) + " given."]);
+            return errors;
         }
 
-        $expectedIndex = 0;
-        foreach ($fieldValue as $index => $optionSpecData) {
-            if ($index !== $expectedIndex) {
-                $errors[] = [ParseSpecException::CODE_INVALID_SPEC_DATA, "Index in 'options' array must be integer and consecutive."];
+        let expectedIndex = 0;
+        for (let index = 0; index < fieldValue.length; index++) {
+            let optionSpecData = fieldValue[index];
+            if (index !== expectedIndex) {
+                errors.push([ParseSpecException.CODE_INVALID_SPEC_DATA, "Index in 'options' array must be integer and consecutive."]);
             }
 
             try {
-                $this->_optionsSpec[] = SpecBuilder::getInstance()->build($optionSpecData, $this->_library);
-            } catch (ParseSpecException $ex) {
-                $optionErrors = $ex->getErrors();
-                $errors = array_merge($errors, $optionErrors);
+                this._optionsSpec.push(SpecBuilder.getInstance().build(optionSpecData, this._library));
+            } catch (ex) {
+
+                if (!(ex instanceof ParseSpecException)) {
+                    throw new Error('Unexpected exception.');
+                }
+
+                let optionErrors = ex._errors; // @todo use ->getErrors();
+                errors = [...errors, ...optionErrors];
             }
 
-            $expectedIndex++;
+            expectedIndex++;
         }
 
-        return $errors;
+        return errors;
     }
-*/
-    parse(value)
-    {/*
-        $errors = [];
 
-        foreach ($this->_optionsSpec as $optionSpec) {
+    parse(value)
+    {
+        let errors = [];
+
+        for (let i = 0; i < this._optionsSpec.length; i++) {
+            let optionSpec = this._optionsSpec[i];
             try {
-                return $optionSpec->parse($value);
-            } catch (ParseSpecException $ex) {
+                return optionSpec.parse(value);
+            } catch (ex) {
+
+                if (!(ex instanceof ParseSpecException)) {
+                    throw new Error('Unexpected exception.');
+                }
+
                 // Continue with next option
             }
         }
 
-        $errors[] = [ParseSpecException::CODE_INVALID_SPEC_DATA, "Value for 'mixed' spec does not follow any of the options."];
-        throw new ParseSpecException('Could not parse the value', ParseSpecException::CODE_MULTIPLE_PARSER_ERROR, $errors);
-    */}
+        errors.push([ParseSpecException.CODE_INVALID_SPEC_DATA, "Value for 'mixed' spec does not follow any of the options."]);
+        throw new ParseSpecException('Could not parse the value', ParseSpecException.CODE_MULTIPLE_PARSER_ERROR, errors);
+    }
 }
 
 

@@ -19,15 +19,15 @@ class StringSpec //extends TypeSpec
     }
 */
     parse(value)
-    {/*
-        $errors = [];
+    {
+        let errors = [];
 
-        if (!is_string($value)) {
-            $errors[] = [ParseSpecException::CODE_STRING_EXPECTED, "Expected string value for 'string' type spec, but " . gettype($value) . " given."];
-            throw new ParseSpecException('Could not parse the value', ParseSpecException::CODE_MULTIPLE_PARSER_ERROR, $errors);
+        if (typeof value !== 'string') {
+            errors.push([ParseSpecException.CODE_STRING_EXPECTED, "Expected string value for 'string' type spec, but " + (typeof value) + " given."]);
+            throw new ParseSpecException('Could not parse the value', ParseSpecException.CODE_MULTIPLE_PARSER_ERROR, errors);
         }
 
-        return $value;*/
+        return value;
     }
 }
 

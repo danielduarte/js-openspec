@@ -19,15 +19,15 @@ class IntegerSpec //extends TypeSpec
     }
 */
     parse(value)
-    {/*
-        $errors = [];
+    {
+        let errors = [];
 
-        if (!is_int($value)) {
-            $errors[] = [ParseSpecException::CODE_INTEGER_EXPECTED, "Expected integer value for 'integer' type spec, but " . gettype($value) . " given."];
-            throw new ParseSpecException('Could not parse the value', ParseSpecException::CODE_MULTIPLE_PARSER_ERROR, $errors);
+        if (!Number.isInteger(value)) {
+            errors.push([ParseSpecException.CODE_INTEGER_EXPECTED, "Expected integer value for 'integer' type spec, but " + (typeof value) + " given."]);
+            throw new ParseSpecException('Could not parse the value', ParseSpecException.CODE_MULTIPLE_PARSER_ERROR, errors);
         }
 
-        return $value;*/
+        return value;
     }
 }
 

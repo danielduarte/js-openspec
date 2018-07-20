@@ -1,25 +1,28 @@
 //use OpenSpec\SpecBuilder;
-//use OpenSpec\ParseSpecException;
+import TypeSpec           from "./TypeSpec";
+import ParseSpecException from "../../ParseSpecException";
 
+class ArraySpec extends TypeSpec
+{
+    _initValues() {
+        this._itemsSpec = null;
+    }
 
-class ArraySpec //extends TypeSpec
-{/*
-    protected $_itemsSpec = null;
-
-    public function getTypeName(): string
+    getTypeName()
     {
         return 'array';
     }
 
-    public function getRequiredFields(): array
+    getRequiredFields()
     {
         return ['type'];
     }
 
-    public function getOptionalFields(): array
+    getOptionalFields()
     {
         return ['items'];
     }
+/*
 
     protected function _validateFieldSpecData_items($fieldValue): array
     {
@@ -35,44 +38,52 @@ class ArraySpec //extends TypeSpec
     }
 */
     parse(value)
-    {/*
-        $parsedValue = [];
+    {
+        let parsedValue = [];
 
-        $errors = [];
+        let errors = [];
 
-        if (!is_array($value)) {
-            $errors[] = [ParseSpecException::CODE_ARRAY_EXPECTED, "Array expected as value of 'array' spec, but " . gettype($value) . " given."];
-            throw new ParseSpecException('Could not parse the value', ParseSpecException::CODE_MULTIPLE_PARSER_ERROR, $errors);
+        if (!Array.isArray(value)) {
+            errors.push([ParseSpecException.CODE_ARRAY_EXPECTED, "Array expected as value of 'array' spec, but " + (typeof value) + " given."]);
+            throw new ParseSpecException('Could not parse the value', ParseSpecException.CODE_MULTIPLE_PARSER_ERROR, errors);
         }
 
-        if ($this->_itemsSpec !== null) {
-            $itemSpec = $this->_itemsSpec;
+        let itemSpec;
+        if (this._itemsSpec !== null) {
+            itemSpec = this._itemsSpec;
         } else {
-            $itemSpec = $this->_getAnySpec();
+            itemSpec = this._getAnySpec();
         }
 
-        $expectedIndex = 0;
-        foreach ($value as $index => $item) {
-            if ($expectedIndex !== $index) {
-                $errors[] = [ParseSpecException::CODE_INVALID_SPEC_DATA, "Index in value of 'array' spec expected to be integer and consecutive."];
-                throw new ParseSpecException('Could not parse the value', ParseSpecException::CODE_MULTIPLE_PARSER_ERROR, $errors);
+        let expectedIndex = 0;
+        for (let index = 0; index < value.length; index++) {
+            let item = value[index];
+            if (expectedIndex !== index) {
+                errors.push([ParseSpecException.CODE_INVALID_SPEC_DATA, "Index in value of 'array' spec expected to be integer and consecutive."]);
+                throw new ParseSpecException('Could not parse the value', ParseSpecException.CODE_MULTIPLE_PARSER_ERROR, errors);
             }
 
             try {
-                $parsedValue[] = $itemSpec->parse($item);
-            } catch (ParseSpecException $ex) {
-                $itemErrors = $ex->getErrors();
+                parsedValue.push(itemSpec.parse(item));
+            } catch (ex) {
 
-                $msg = '- ' . implode(PHP_EOL . '- ', array_column($itemErrors, 1));
-                $errors[] = [ParseSpecException::CODE_INVALID_SPEC_DATA, "Array item with index $index does not follow the spec." . PHP_EOL . $msg];
-                throw new ParseSpecException('Could not parse the value', ParseSpecException::CODE_MULTIPLE_PARSER_ERROR, $errors);
+                if (!(ex instanceof ParseSpecException)) {
+                    throw new Error('Unexpected exception.');
+                }
+
+                let itemErrors = ex._errors; // @todo use getErrors();
+
+                let itemErrorsMessages = itemErrors.map((error) => { return error[1]; });
+                let msg = '- ' + itemErrorsMessages.join("\n- ");
+                errors.push([ParseSpecException.CODE_INVALID_SPEC_DATA, "Array item with index $index does not follow the spec.\n" + msg]);
+                throw new ParseSpecException('Could not parse the value', ParseSpecException.CODE_MULTIPLE_PARSER_ERROR, errors);
             }
 
-            $expectedIndex++;
+            expectedIndex++;
         }
 
         // No errors
-        return $parsedValue;*/
+        return parsedValue;
     }
 }
 

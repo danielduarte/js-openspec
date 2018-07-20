@@ -1,33 +1,37 @@
-//use OpenSpec\ParseSpecException;
+import TypeSpec           from "./TypeSpec";
+// import ParseSpecException from "../../ParseSpecException";
 
 
 class FloatSpec //extends TypeSpec
-{/*
-    public function getTypeName(): string
+{
+    _initValues() {
+    }
+
+    getTypeName()
     {
         return 'float';
     }
 
-    public function getRequiredFields(): array
+    getRequiredFields()
     {
         return ['type'];
     }
 
-    public function getOptionalFields(): array
+    getOptionalFields()
     {
         return [];
     }
-*/
-    parse(value)
-    {/*
-        $errors = [];
 
-        if (!is_float($value)) {
-            $errors[] = [ParseSpecException::CODE_FLOAT_EXPECTED, "Expected float value for 'float' type spec, but " . gettype($value) . " given."];
-            throw new ParseSpecException('Could not parse the value', ParseSpecException::CODE_MULTIPLE_PARSER_ERROR, $errors);
+    parse(value)
+    {
+        let errors = [];
+
+        if (typeof value !== 'number' || Number.isInteger(value)) {
+            errors.push([ParseSpecException.CODE_FLOAT_EXPECTED, "Expected float value for 'float' type spec, but " + (typeof value) + " given."]);
+            throw new ParseSpecException('Could not parse the value', ParseSpecException.CODE_MULTIPLE_PARSER_ERROR, errors);
         }
 
-        return $value;*/
+        return value;
     }
 }
 

@@ -1,42 +1,45 @@
-//use OpenSpec\ParseSpecException;
-//use OpenSpec\SpecLibrary;
+import TypeSpec           from "./TypeSpec";
+import ParseSpecException from "../../ParseSpecException";
+import SpecLibrary        from "../../SpecLibrary";
 
 
-class RefSpec //extends TypeSpec
-{/*
-    protected $_specName = null;
+class RefSpec extends TypeSpec
+{
+    _initValues() {
+        this._specName = null;
+    }
 
-    public function getTypeName(): string
+    getTypeName()
     {
         return 'ref';
     }
 
-    public function getRequiredFields(): array
+    getRequiredFields()
     {
         return ['type', 'spec'];
     }
 
-    public function getOptionalFields(): array
+    getOptionalFields()
     {
         return [];
     }
 
-    protected function _validateFieldSpecData_spec($fieldValue): array
+    _validateFieldSpecData_spec(fieldValue)
     {
-        $errors = [];
+        let errors = [];
 
-        if (!is_string($fieldValue)) {
-            $errors[] = [ParseSpecException::CODE_STRING_EXPECTED, "String expected as value of 'spec' field of reference, but " . gettype($fieldValue) . " given."];
-            return $errors;
+        if (typeof fieldValue !== 'string') {
+            errors.push([ParseSpecException.CODE_STRING_EXPECTED, "String expected as value of 'spec' field of reference, but " + (typeof fieldValue) + " given."]);
+            return errors;
         }
 
-        $this->_specName = $fieldValue;
+        this._specName = fieldValue;
 
         // @todo consider if it will be needed to check the existence of the referenced spec.
 
-        return $errors;
+        return errors;
     }
-*/
+
     parse(value)
     {/*
         $errors = [];

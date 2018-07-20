@@ -1,4 +1,4 @@
-//use OpenSpec\SpecBuilder;
+import SpecBuilder        from "../../SpecBuilder";
 import TypeSpec           from "./TypeSpec";
 import ParseSpecException from "../../ParseSpecException";
 
@@ -22,21 +22,25 @@ class ArraySpec extends TypeSpec
     {
         return ['items'];
     }
-/*
 
-    protected function _validateFieldSpecData_items($fieldValue): array
+    _validateFieldSpecData_items(fieldValue)
     {
-        $errors = [];
+        let errors = [];
 
         try {
-            $this->_itemsSpec = SpecBuilder::getInstance()->build($fieldValue, $this->_library);
-        } catch (ParseSpecException $ex) {
-            $errors = $ex->getErrors();
+            this._itemsSpec = SpecBuilder.getInstance().build(fieldValue, this._library);
+        } catch (ex) {
+
+            if (!(ex instanceof ParseSpecException)) {
+                throw new Error('Unexpected exception.');
+            }
+
+            errors = ex._errors; // @todo->getErrors();
         }
 
-        return $errors;
+        return errors;
     }
-*/
+
     parse(value)
     {
         let parsedValue = [];

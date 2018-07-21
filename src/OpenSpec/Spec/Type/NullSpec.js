@@ -25,7 +25,7 @@ class NullSpec extends TypeSpec
 
     parse(value)
     {
-        errors = [];
+        let errors = [];
 
         if (value !== null) {
             errors.push([ParseSpecException.CODE_NULL_EXPECTED, "Expected null value for 'null' type spec, but " + (typeof value) + " given."]);

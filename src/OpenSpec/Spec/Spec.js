@@ -1,6 +1,4 @@
 import ParseSpecException from "../ParseSpecException";
-import SpecLibrary from "../SpecLibrary";
-import Entity from "../Entity";
 
 
 class Spec
@@ -14,7 +12,7 @@ class Spec
         return this._library;
     }
 
-    validate(value,throwExceptionOnInvalid = false)
+    validate(value, throwExceptionOnInvalid = false)
     {
         let errors = [];
 
@@ -24,7 +22,7 @@ class Spec
 
         } catch (ex) {
 
-            if (!(err instanceof ParseSpecException)) {
+            if (!(ex instanceof ParseSpecException)) {
                 throw new Error('Unexpected exception.');
             }
 

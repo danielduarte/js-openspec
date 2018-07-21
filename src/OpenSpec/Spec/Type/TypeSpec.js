@@ -3,6 +3,7 @@ use OpenSpec\Spec\Spec;*/
 import SpecBuilder from "../../SpecBuilder";
 import SpecLibrary from "../../SpecLibrary";
 import ParseSpecException from "../../ParseSpecException";
+import Spec from "../Spec";
 // import ObjectSpec  from "./ObjectSpec";
 
 
@@ -13,10 +14,12 @@ const array_diff = function (array1, array2) {
     });
 };
 
-class TypeSpec //extends Spec
+class TypeSpec extends Spec
 {
     constructor(specData, library)
     {
+        super();
+
         this._initValues();
 
         this._anySpec = null;

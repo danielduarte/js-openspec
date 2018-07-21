@@ -55,7 +55,7 @@ class SpecLibrary
     {
         this._specs = [];
     }
-/*
+
     getSpec(name)
     {
         if (!this.hasSpec(name)) {
@@ -64,7 +64,7 @@ class SpecLibrary
 
         return this._specs[name];
     }
-
+/*
     validateValue(specName, value)
     {
         errors = this.validateValueGetErrors(specName, value);

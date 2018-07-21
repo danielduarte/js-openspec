@@ -85,25 +85,30 @@ class ObjectSpec extends TypeSpec
 
         return errors;
     }
-/*
-    protected function _validateFieldSpecData_extensionFields($fieldValue): array
+
+    _validateFieldSpecData_extensionFields(fieldValue)
     {
-        $errors = [];
+        let errors = [];
 
         // @todo IMPORTANT check if $this->_extensible could have not been initialized yet
-        if (!$this->_extensible) {
-            $errors[] = [ParseSpecException::CODE_EXTENSIBLE_EXPECTED, "Field 'extensionFields' can only be used when 'extensible' is true."];
+        if (!this._extensible) {
+            errors.push([ParseSpecException.CODE_EXTENSIBLE_EXPECTED, "Field 'extensionFields' can only be used when 'extensible' is true."]);
         }
 
         try {
-            $this->_extensionFieldsSpec = SpecBuilder::getInstance()->build($fieldValue, $this->_library);
-        } catch (ParseSpecException $ex) {
-            $errors = $ex->getErrors();
+            this._extensionFieldsSpec = SpecBuilder.getInstance().build(fieldValue, this._library);
+        } catch (ex) {
+
+            if (!(ex instanceof ParseSpecException)) {
+                throw new Error('Unexpected exception.');
+            }
+
+            errors = ex._errors; // @todo ->getErrors();
         }
 
-        return $errors;
+        return errors;
     }
-*/
+
     _validateFieldSpecData_requiredFields(fieldValue)
     {
         let errors = [];

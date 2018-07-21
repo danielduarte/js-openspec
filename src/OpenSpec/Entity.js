@@ -18,12 +18,11 @@ class Entity
 
         return new Proxy(this, this);
     }
-/*
-    public function getData()
+
+    getData()
     {
-        return $this->_data;
+        return this._data;
     }
-*/
 
     get(instance, prop) { // @todo check the proxy method "apply" instead of using get
 

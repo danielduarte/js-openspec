@@ -1,5 +1,3 @@
-//import ParseSpecException from './ OpenSpec\Spec\Type\TypeSpec;
-
 import NullSpec           from './Spec/Type/NullSpec';
 import BooleanSpec        from './Spec/Type/BooleanSpec';
 import StringSpec         from './Spec/Type/StringSpec';

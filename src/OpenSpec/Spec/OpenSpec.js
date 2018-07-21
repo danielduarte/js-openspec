@@ -59,38 +59,39 @@ class OpenSpec extends Spec
 
         return [];
     }
-/*
-    protected function _parseDefinitions($definitionsData): void
+
+    _parseDefinitions(definitionsData)
     {
-        foreach ($definitionsData as $defName => $defSpec) {
-            $this->_library->registerSpecFromData($defName, $defSpec);
+        for (let defName in definitionsData) if (definitionsData.hasOwnProperty(defName)) {
+            let defSpec = definitionsData[defName];
+            this._library.registerSpecFromData(defName, defSpec);
         }
     }
-*/
+
     parse(userSpecData)
     {
         return this._spec.parse(userSpecData);
     }
-/*
-    public function getOpenspecVersion()
+
+    getOpenspecVersion()
     {
-        return $this->_openspecVersion;
+        return this._openspecVersion;
     }
 
-    public function getName()
+    getName()
     {
-        return $this->_name;
+        return this._name;
     }
 
-    public function getVersion()
+    getVersion()
     {
-        return $this->_version;
+        return this._version;
     }
 
-    public function getSpec()
+    getSpec()
     {
-        return $this->_spec;
-    }*/
+        return this._spec;
+    }
 }
 
 

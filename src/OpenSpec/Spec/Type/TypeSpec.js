@@ -1,10 +1,6 @@
-/*use OpenSpec\ParseSpecException;
-use OpenSpec\Spec\Spec;*/
 import SpecBuilder from "../../SpecBuilder";
-import SpecLibrary from "../../SpecLibrary";
 import ParseSpecException from "../../ParseSpecException";
 import Spec from "../Spec";
-// import ObjectSpec  from "./ObjectSpec";
 
 
 // @todo move this util function to a more apropriate place

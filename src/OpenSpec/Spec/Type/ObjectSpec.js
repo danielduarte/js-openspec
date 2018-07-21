@@ -146,11 +146,6 @@ class ObjectSpec extends TypeSpec
 
         let errors = [];
 
-        /* to be deleted */
-        // errors.push([ParseSpecException.CODE_MISSING_REQUIRED_FIELD, `Missing required field(s) xxxx in object spec.`]);
-        // throw new ParseSpecException('Could not parse the value', ParseSpecException.CODE_MULTIPLE_PARSER_ERROR, errors);
-        /* /to be deleted */
-
         if (typeof value !== 'object' || Array.isArray(value)) {
             errors.push([ParseSpecException.CODE_ARRAY_EXPECTED, "Expected object as value for object spec, but " + (typeof value) + " given."]);
             throw new ParseSpecException('Could not parse the value', ParseSpecException.CODE_MULTIPLE_PARSER_ERROR, errors);

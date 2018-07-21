@@ -20,15 +20,6 @@ class ParseSpecException extends Error
     {
         return this._errors;
     }
-
-    // containsError(code)
-    // {
-    //     let errorCodes = this._errors.map((error) => {
-    //         return error[0];
-    //     });
-    //
-    //     return errorCodes.indexOf(code) >= 0;
-    // }
 }
 
 // @todo review these answer and the following line

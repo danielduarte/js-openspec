@@ -1,5 +1,3 @@
-//import Spec from 'OpenSpec\Spec\Spec';
-// @todo finish this conversion to JS
 import SpecLibraryException from './SpecLibraryException';
 import SpecBuilder          from './SpecBuilder';
 
@@ -64,7 +62,7 @@ class SpecLibrary
 
         return this._specs[name];
     }
-/*
+
     validateValue(specName, value)
     {
         errors = this.validateValueGetErrors(specName, value);
@@ -80,11 +78,11 @@ class SpecLibrary
             if (ex instanceof ParseSpecException) {
                 return ex.getErrors();
             }
-            throw ex;
+            throw ex; // @todo apply this solution to the other places where there are ParseSpecException
         }
 
         return [];
-    }*/
+    }
 }
 
 export default SpecLibrary;
